@@ -18,7 +18,7 @@ spec:
         - name: vprodb
           image: vprofile/vprofiledb:V1 # image from docker repository
           args:
-            - "ignore-db-dir=lost+found" # ignore directory to mount volume
+            - "--ignore-db-dir=lost+found" # ignore directory to mount volume
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: vpro-db-data
