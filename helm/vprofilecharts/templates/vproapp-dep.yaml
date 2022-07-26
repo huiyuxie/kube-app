@@ -16,7 +16,7 @@ spec:
     spec:
       containers: # only launch after init containers complete jobs
         - name: vproapp
-          image: vprofile/vprofileapp:V1 # image from docker repository
+          image: {{.Values.appimage}} # give image source by pass '--set appimage=...' in helm command line
           ports:
             - name: vproapp-port
               containerPort: 8080
