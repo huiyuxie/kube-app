@@ -9,8 +9,8 @@ pipeline {
 */
 
     environment {
-        registry = "xiehuiyu99/vprofiledock"
-        registryCredential = 'dockerhub'
+        registry = "xiehuiyu99/vprofiledock" // docker hub repository
+        registryCredential = 'dockerhub' // jenkins credential id (user-password)
     }
 
     stages{
@@ -69,7 +69,7 @@ pipeline {
           }
         }
 
-        stage('Remove Unused docker image') {
+        stage('Remove Unused Docker Image') {
           steps{
             sh "docker rmi $registry:$BUILD_NUMBER"
           }
