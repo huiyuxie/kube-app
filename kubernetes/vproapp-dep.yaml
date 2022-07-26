@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vproapp
+  labels:
+    app: vproapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vproapp
+  template:
+    metadata:
+      labels:
+        app: vproapp
+    spec:
+      containers: # only launch after init containers complete jobs
+        - name: vproapp
+          image: vprofile/vprofileapp:V1 # image from docker repository
+          ports:
+            - name: vproapp-port
+              containerPort: 8080
+      initContainers: # become dead when finish jobs
+        - name: init-vprodb
+          image: busybox
+          command: ['sh', '-c', 'until nslookup vprodb; do echo waiting for mydb; sleep 2; done;']
+        - name: init-vpromc
+          image: busybox
+          command: ['sh', '-c', 'until nslookup vpromc; do echo waiting for mymc; sleep 2; done;']
