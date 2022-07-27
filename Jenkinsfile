@@ -50,10 +50,10 @@ pipeline {
             }
         }
 
-        stage('Building image') {
+        stage('Build Image') {
             steps{
               script {
-                dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                dockerImage = docker.build registry + ":$BUILD_NUMBER" // build dockerfile in current directory
               }
             }
         }
